@@ -19,9 +19,17 @@ string itc_cmp_str(string str1, string str2, int num) {
 }
 
 int itc_find_str(string str1, string str2) {
-	for (int i = 0; i < (itc_len(str1) - itc_len(str2) - 1); i++) {
-		if ((i + itc_len(str2) - 1) > itc_len(str1)) return -1;
-		if (str2 == itc_slice_str(str1, i - 1, i + itc_len(str2) - 1)) return i;
+	int check;
+	check = 1;
+	for (int i = 0; i < (itc_len(str1) - itc_len(str2)); i++) {
+		check = 1;
+		for (int j = 0; j < itc_len(str2); j++) {
+			if (str1[i + j] != str2[j]) {
+				check = -1;
+				break;
+			}
+		}
+		if (check == 1) return i;
 	}
-	return -1;
+	return check;
 }
